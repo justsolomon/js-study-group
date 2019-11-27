@@ -1,37 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Exercise 25 - Complex Data - JavaScript Explained</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <h1>Complex Data Exercises</h1>
     <p>Open the web inspector console to test.</p>
-  </body>
-  <script>
-    const posts = [
-      {
+</body>
+<script>
+    const posts = [{
         id: 1,
         title: `Welcome to JS`,
-        cats: [`js`, `intro`]
-      },
-      {
+        cats: [`js`, `intro`],
+        url: `welcome-to-js`,
+        excerpt: `An introduction`
+    }, {
         id: 2,
         title: `Using a Code Editor`,
-        cats: [`tools`, `intro`]
-      },
-      {
+        cats: [`tools`, `intro`],
+        url: `using-a-code-editor`,
+        excerpt: `A tutorial on the basics`
+    }, {
         id: 3,
         title: `JavaScript Arrays`,
-        cats: [`js`]
-      },
-      {
-        id: 4,
-        title: `More JS Practice`,
-        cats: [`js`, `practice`]
-      }
-    ];
-  </script>
+        cats: [`js`],
+        url: `using-a-code-editor`,
+        excerpt: `A tutorial on the basics`
+    }];
+
+    const jsArticles = posts.filter(post => post.cats.includes(`js`));
+
+    const getPostMarkup = (posts) => {
+        posts.map(post => {
+            console.log(`<div class="posts">
+          <article class="${post.id}">
+            <h2>${post.title}</h2>
+            <p>${post.excerpt}</p>
+          </article>
+         </div>`)
+        })
+    };
+
+    console.log(getPostMarkup(jsArticles));
+</script>
+
 </html>
