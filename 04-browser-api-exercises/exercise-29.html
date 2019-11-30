@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Exercise 28 - The Browser API - JavaScript Explained</title>
-  </head>
-  <style>
+</head>
+<style>
     .overlay {
-      position: absolute;
-      width: 100%;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      background: #22222280;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background: #22222280;
     }
+    
     .modal {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      min-width: 400px;
-      padding: 2rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        min-width: 400px;
+        padding: 2rem;
     }
+    
     .modal .close-modal {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
     }
-  </style>
-  <body>
+</style>
+
+<body>
     <div id="container">
-      <h1>The Browser API Exercises</h1>
-      <p>Open the <a href="#">web inspector</a> console to test.</p>
-      <p><button class="open-modal">Open Modal</button></p>
+        <h1>The Browser API Exercises</h1>
+        <p>Open the <a href="#">web inspector</a> console to test.</p>
+        <p><button class="open-modal">Open Modal</button></p>
     </div>
-  </body>
-  <script>
+</body>
+<script>
     const button = document.querySelector(`button.open-modal`);
 
     const modal = () => `
@@ -54,10 +58,19 @@
     // Place your code below this line
 
     function openModal(e) {
-      const body = document.querySelector(`body`);
-      body.insertAdjacentHTML(`beforeend`, modal());
+        const body = document.querySelector(`body`);
+        body.insertAdjacentHTML(`beforeend`, modal());
+
+        const closebutton = document.querySelector('.close-modal');
+        closebutton.addEventListener(`click`, removeModal)
+    }
+
+    function removeModal(e) {
+        const modal = document.querySelector('.overlay');
+        modal.remove();
     }
 
     button.addEventListener(`click`, openModal);
-  </script>
+</script>
+
 </html>
