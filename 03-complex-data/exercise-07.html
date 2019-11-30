@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Exercise 7 - Complex Data - JavaScript Explained</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <h1>Complex Data Exercises</h1>
     <p>Open the web inspector console to test.</p>
-  </body>
-  <script>
+</body>
+<script>
     const post = {
-      title: `JavaScript Explained`,
-      url: `https://javascriptexplained.com/`
+        title: `JavaScript Explained`,
+        url: `https://javascriptexplained.com/`
     };
+    const getHeaderMarkup = (post) => {
+        return `<h1><a href="${post.url}">${post.title}</a></h1>`
+    }
+    console.log(getHeaderMarkup(post));
     // Place your code below this line, before the closing script tag
-  </script>
+</script>
+
 </html>
