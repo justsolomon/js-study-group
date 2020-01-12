@@ -19,23 +19,32 @@
   </body>
   <script>
     const apiURL = `https://wordsapiv1.p.rapidapi.com/words`;
-    const apiKey = ``;
+    const apiKey = `e469307d08mshf0694906f9a4e9fp1e7822jsn4092bb67f84a`;
 
     const form = document.querySelector(`#word-search`);
     const results = document.querySelector(`#results`);
 
-    fetch(`${apiURL}/${word}`, {
-      headers: {
-        "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-        "x-rapidapi-key": `${apiKey}`
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
+
+      form.addEventListener(`submit`, function(e) {
+        e.preventDefault();
+        lookupWord();
       })
-      .catch(error => {
-        console.error(error);
-      });
+
+      function lookupWord() {
+        let word = document.querySelector('#word').value;
+        fetch(`${apiURL}/${word}`, {
+          headers: {
+            "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+            "x-rapidapi-key": `${apiKey}`
+          }
+        })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
   </script>
 </html>

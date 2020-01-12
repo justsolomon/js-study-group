@@ -26,7 +26,7 @@
   </body>
   <script>
     const apiURL = `https://wordsapiv1.p.rapidapi.com/words`;
-    const apiKey = ``;
+    const apiKey = `e469307d08mshf0694906f9a4e9fp1e7822jsn4092bb67f84a`;
 
     const form = document.querySelector(`#word-search`);
     const submitButton = document.querySelector(
@@ -40,6 +40,11 @@
       const word = document.querySelector(`#word`).value;
 
       e.preventDefault();
+      let img = `<img src="../assets/loader.svg" id="spinner" alt="Loading spinner image" />`;
+      submitButton.insertAdjacentHTML( `afterbegin`, img
+      );
+      submitButton.disabled = true;
+      let spinner = submitButton.querySelector('img');
 
       fetch(`${apiURL}/${word}`, {
         headers: {
@@ -50,12 +55,16 @@
         .then(res => {
           if (res.status === 404) {
             results.innerHTML = `<p>Word not found!</p>`;
+            submitButton.disabled = false;
+            submitButton.removeChild(spinner);
           }
           return res.json();
         })
         .then(data => {
           console.log(data);
           displayDefinitions(data.results);
+          submitButton.disabled = false;
+          submitButton.removeChild(spinner);
         })
         .catch(error => {
           console.error(error);

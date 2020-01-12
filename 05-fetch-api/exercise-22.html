@@ -14,11 +14,14 @@
   </body>
   <script>
     const apiURL = `https://wordsapiv1.p.rapidapi.com/words`;
-    const apiKey = ``;
+    const apiKey = `e469307d08mshf0694906f9a4e9fp1e7822jsn4092bb67f84a`;
     const word = `soliloquy`;
 
     fetch(`${apiURL}/${word}`, {
-      headers: {}
+      headers: {
+        "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+	      "x-rapidapi-key": `${apiKey}`
+      }
     })
       .then(res => res.json())
       .then(data => {

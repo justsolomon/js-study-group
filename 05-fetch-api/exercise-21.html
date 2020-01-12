@@ -14,7 +14,11 @@
   </body>
   <script>
     const apiURL = `https://wordsapiv1.p.rapidapi.com/words`;
-    const apiKey = ``;
-    const word = ``;
+    const apiKey = `11fbd6c8e1msh9b2abb48e4ef14dp1c6f30jsna28656872b5b`;
+    const word = `soliloquy`;
+
+    fetch(`${apiURL}/${word}`)
+      .then(res => res.json())
+      .then(data => console.log(data));
   </script>
 </html>
