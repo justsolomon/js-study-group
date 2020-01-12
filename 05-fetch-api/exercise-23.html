@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Exercise 23 - The Fetch API - JavaScript Explained</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1><a href="#">The Fetch API Exercises</a></h1>
+      <p>Open the web inspector console to test.</p>
+      <form id="word-search" action="#">
+        <input type="text" placeholder="word" id="word" />
+        <button type="submit">Look up word</button>
+      </form>
+      <div id="results"></div>
+    </div>
+  </body>
+  <script>
+    const apiURL = `https://wordsapiv1.p.rapidapi.com/words`;
+    const apiKey = ``;
+
+    const form = document.querySelector(`#word-search`);
+    const results = document.querySelector(`#results`);
+
+    fetch(`${apiURL}/${word}`, {
+      headers: {
+        "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+        "x-rapidapi-key": `${apiKey}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  </script>
+</html>

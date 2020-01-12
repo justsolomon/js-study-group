@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Exercise 22 - The Fetch API - JavaScript Explained</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>The Fetch API Exercises</h1>
+      <p>Open the web inspector console to test.</p>
+    </div>
+  </body>
+  <script>
+    const apiURL = `https://wordsapiv1.p.rapidapi.com/words`;
+    const apiKey = ``;
+    const word = `soliloquy`;
+
+    fetch(`${apiURL}/${word}`, {
+      headers: {}
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  </script>
+</html>

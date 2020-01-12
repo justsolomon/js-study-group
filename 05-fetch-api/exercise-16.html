@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Exercise 16 - The Fetch API - JavaScript Explained</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>The Fetch API Exercises</h1>
+        <p>Open the web inspector console to test.</p>
+    </div>
+</body>
+<script>
+    const container = document.querySelector(`#app`);
+
+    async function init() {
+        const exchange = await getRates();
+        loadDropDown(exchange.rates);
+    }
+    init();
+
+    function logRate() {
+        let rate = this.value;
+        rate = parseFloat(rate).toFixed(2);
+        console.log(rate);
+    }
+
+    function getRates() {
+        return fetch(`https://api.exchangeratesapi.io/latest`)
+            .then(response => response.json())
+            .catch(error => console.error(error));
+    }
+
+    function loadDropDown(rates) {
+        let markup = `<select id="rates">`;
+        markup += `<option value="1">Choose Currency</option>`;
+        for (let rate in rates) {
+            markup += `<option value="${rates[rate]}">${rate}</option>`;
+        }
+        markup += `</select>`;
+
+        container.insertAdjacentHTML(`beforeend`, markup);
+        const selectField = document.querySelector('#rates');
+        selectField.addEventListener('change', logRate)
+    }
+</script>
+
+</html>

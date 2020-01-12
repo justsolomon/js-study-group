@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Exercise 19 - The Fetch API - JavaScript Explained</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1><a href="#">The Fetch API Exercises</a></h1>
+        <p>Open the <a href="#">web inspector</a> console to test.</p>
+        <p class="dropdown"></p>
+        <div>
+            1
+            <span class="base"></span> =
+            <span class="rate"></span>
+            <span class="currency"></span>
+        </div>
+    </div>
+</body>
+<script>
+    async function init() {
+        const base = `EUR`;
+        loadBase(base);
+
+        const exchange = await getRates(base);
+        loadDropDown(exchange.rates);
+    }
+    init();
+
+    function loadBase(base) {
+        const container = document.querySelector(`.base`);
+        container.insertAdjacentHTML(`beforeend`, base);
+    }
+
+    function logRate() {
+        const rateContainer = document.querySelector(`.rate`);
+        const rate = parseFloat(this.value).toFixed(2);
+        rateContainer.innerHTML = rate;
+        const currencyContainer = document.querySelector(`.currency`);
+        const currency = document.querySelector(`option[value="${this.value}"]`)
+        currencyContainer.innerHTML = currency.textContent;
+    }
+
+    function getRates(base) {
+        return fetch(`https://api.exchangeratesapi.io/latest?base=${base}`)
+            .then(response => response.json())
+            .catch(error => console.error(error));
+    }
+
+    function loadDropDown(rates) {
+        const container = document.querySelector(`.dropdown`);
+        let markup = `<select id="rates">`;
+        markup += `<option value="1">Choose Currency</option>`;
+        for (let rate in rates) {
+            markup += `<option value="${rates[rate]}">${rate}</option>`;
+        }
+        markup += `</select>`;
+        container.insertAdjacentHTML(`beforeend`, markup);
+
+        const selectField = document.querySelector(`#rates`);
+        selectField.addEventListener(`change`, logRate);
+    }
+</script>
+
+</html>

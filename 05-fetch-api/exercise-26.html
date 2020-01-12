@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Exercise 26 - The Fetch API - JavaScript Explained</title>
+    <style>
+      button[type="submit"] img {
+        display: inline-block;
+        max-height: 10px;
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1><a href="#">The Fetch API Exercises</a></h1>
+      <p>Open the web inspector console to test.</p>
+      <form id="word-search" action="#">
+        <input type="text" placeholder="word" id="word" />
+        <button type="submit">Look up word</button>
+      </form>
+      <div id="results"></div>
+    </div>
+  </body>
+  <script>
+    const apiURL = `https://wordsapiv1.p.rapidapi.com/words`;
+    const apiKey = ``;
+
+    const form = document.querySelector(`#word-search`);
+    const submitButton = document.querySelector(
+      `#word-search button[type="submit"]`
+    );
+    const results = document.querySelector(`#results`);
+
+    form.addEventListener(`submit`, lookupWord);
+
+    function lookupWord(e) {
+      const word = document.querySelector(`#word`).value;
+
+      e.preventDefault();
+
+      fetch(`${apiURL}/${word}`, {
+        headers: {
+          "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+          "x-rapidapi-key": `${apiKey}`
+        }
+      })
+        .then(res => {
+          if (res.status === 404) {
+            results.innerHTML = `<p>Word not found!</p>`;
+          }
+          return res.json();
+        })
+        .then(data => {
+          console.log(data);
+          displayDefinitions(data.results);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+
+    function displayDefinitions(definitions) {
+      let markup = `<ul>`;
+      definitions.forEach(def => {
+        markup += `<li>(${def.partOfSpeech}) ${def.definition}</li>`;
+      });
+      markup += `</ul>`;
+
+      results.innerHTML = markup;
+    }
+  </script>
+</html>
