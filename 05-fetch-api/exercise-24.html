@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Exercise 24 - The Fetch API - JavaScript Explained</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1><a href="#">The Fetch API Exercises</a></h1>
+      <p>Open the web inspector console to test.</p>
+      <form id="word-search" action="#">
+        <input type="text" placeholder="word" id="word" />
+        <button type="submit">Look up word</button>
+      </form>
+      <div id="results"></div>
+    </div>
+  </body>
+  <script>
+    const apiURL = `https://wordsapiv1.p.rapidapi.com/words`;
+    const apiKey = `e469307d08mshf0694906f9a4e9fp1e7822jsn4092bb67f84a`;
+
+    const form = document.querySelector(`#word-search`);
+    const results = document.querySelector(`#results`);
+
+    form.addEventListener(`submit`, lookupWord);
+
+    function lookupWord(e) {
+      const word = document.querySelector(`#word`).value;
+
+      e.preventDefault();
+
+      fetch(`${apiURL}/${word}`, {
+        headers: {
+          "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+          "x-rapidapi-key": `${apiKey}`
+        }
+      })
+        .then(res => {
+          if (res.status === 404) {
+            results.innerHTML = `<p>Word not found!</p>`;
+          }
+          return res.json();
+        })
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  </script>
+</html>

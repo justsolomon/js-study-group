@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Exercise 29 - The Fetch API - JavaScript Explained</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>The Fetch API Exercises</h1>
+      <p>Open the web inspector console to test.</p>
+      <div id="results"></div>
+    </div>
+  </body>
+  <script>
+    const url = `https://dev-js-explained-api.pantheonsite.io/wp-json/wp/v2/posts`;
+    let posts = ``;
+
+    async function init() {
+      posts = await fetchPosts();
+      console.log(posts);
+    }
+    init();
+
+    function fetchPosts() {
+      return fetch(url)
+        .then(res => res.json())
+        .catch(error => console.error(error));
+    }
+  </script>
+</html>

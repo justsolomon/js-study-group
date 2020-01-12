@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Exercise 14 - The Fetch API - JavaScript Explained</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>The Fetch API Exercises</h1>
+        <p>Open the web inspector console to test.</p>
+    </div>
+</body>
+<script>
+    // Place code below here
+    function getRates() {
+        return fetch('https://api.exchangeratesapi.io/latest')
+            .then(res => res.json)
+            .catch((err) => console.error(err))
+    }
+
+    async function init() {
+        const exchange = await getRates();
+        console.log(exchange);
+    }
+    init();
+</script>
+
+</html>
